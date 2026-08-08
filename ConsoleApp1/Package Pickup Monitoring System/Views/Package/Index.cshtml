@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Package_Pickup_Monitoring_System.Models.Package>
+@{ ViewData["Title"] = "Monitoring List"; }
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold text-dark mb-1">Package Monitoring</h2>
+        <p class="text-muted small mb-0">Track all incoming resident and employee deliveries</p>
+    </div>
+    <a asp-action="Create" class="btn btn-navy shadow-sm">+ Register Package</a>
+</div>
+
+<div class="card card-rounded p-3 mb-4">
+    <form asp-action="Index" method="get">
+        <div class="input-group input-group-rounded">
+            <input type="text" name="searchTerm" value="@ViewBag.SearchTerm" class="form-control bg-light border-0" placeholder="Search tracking #, recipient, courier, or unit..." />
+            <button type="submit" class="btn btn-navy px-4">Search</button>
+            @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+            {
+                <a asp-action="Index" class="btn btn-outline-secondary btn-rounded ms-2">Clear</a>
+            }
+        </div>
+    </form>
+</div>
+
+<div class="table-rounded-container">
+    <table class="table table-hover align-middle mb-0 bg-white">
+        <thead class="table-navy">
+            <tr class="text-nowrap">
+                <th class="py-3 ps-4">Tracking #</th>
+                <th class="py-3">Recipient & Unit</th>
+                <th class="py-3">Courier</th>
+                <th class="py-3">Type</th>
+                <th class="py-3">Arrival Date/Time</th>
+                <th class="py-3">Notes</th>
+                <th class="py-3">Status</th>
+                <th class="py-3 text-end pe-4">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="fw-bold text-dark ps-4">@item.TrackingNumber</td>
+                    <td>
+                        <div class="fw-semibold">@item.RecipientName</div>
+                        <div class="text-muted small">@item.UnitNumber</div>
+                    </td>
+                    <td><span class="badge bg-light text-dark border">@item.CourierCompany</span></td>
+                    <td>@item.PackageType</td>
+                    <td class="small text-muted">@item.ArrivalDateTime.ToString("MMM dd, yyyy h:mm tt")</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.Notes))
+                        {
+                            <span class="note-text d-inline-block" title="@item.Notes">
+                                📝 @item.Notes
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="text-muted small">-</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Status == Package_Pickup_Monitoring_System.Models.PackageStatus.WaitingForPickup)
+                        {
+                            <span class="badge badge-rounded bg-warning text-dark">Waiting for Pickup</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-rounded bg-success">Claimed</span>
+                        }
+                    </td>
+                    <td class="text-end pe-4">
+                        <div class="btn-group gap-1" role="group">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary btn-rounded">Details</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary btn-rounded">Edit</a>
+                            @if (item.Status == Package_Pickup_Monitoring_System.Models.PackageStatus.WaitingForPickup)
+                            {
+                                <form asp-action="Claim" asp-route-id="@item.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-success btn-rounded">Claim</button>
+                                </form>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,94 @@
+:root {
+    --navy-dark: #0f172a;
+    --navy-primary: #1e293b;
+    --navy-accent: #3b82f6;
+    --navy-light: #f8fafc;
+    --navy-card-bg: #ffffff;
+    --navy-border: #cbd5e1;
+}
+
+body {
+    background-color: var(--navy-light);
+    color: #334155;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+.card-rounded {
+    border-radius: 1.25rem !important;
+    border: 1px solid var(--navy-border);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1);
+    background-color: var(--navy-card-bg);
+}
+
+.form-control-rounded {
+    border-radius: 0.75rem !important;
+}
+
+.btn-rounded {
+    border-radius: 0.75rem !important;
+}
+
+.input-group-rounded .form-control {
+    border-top-left-radius: 0.75rem !important;
+    border-bottom-left-radius: 0.75rem !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.input-group-rounded .btn {
+    border-top-right-radius: 0.75rem !important;
+    border-bottom-right-radius: 0.75rem !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.navbar-custom {
+    background-color: var(--navy-dark) !important;
+    border-bottom: 3px solid var(--navy-accent);
+}
+
+    .navbar-custom .navbar-brand,
+    .navbar-custom .nav-link {
+        color: #f1f5f9 !important;
+    }
+
+.btn-navy {
+    background-color: var(--navy-primary);
+    border-color: var(--navy-primary);
+    color: #ffffff;
+    border-radius: 0.75rem;
+    padding: 0.6rem 1.2rem;
+    transition: all 0.2s ease-in-out;
+}
+
+    .btn-navy:hover {
+        background-color: var(--navy-dark);
+        border-color: var(--navy-dark);
+        color: #ffffff;
+    }
+
+.table-rounded-container {
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+    border: 1px solid var(--navy-border);
+}
+
+.table-navy thead {
+    background-color: var(--navy-dark);
+    color: #ffffff;
+}
+
+.badge-rounded {
+    border-radius: 0.5rem;
+    padding: 0.4em 0.75em;
+}
+
+.note-text {
+    font-size: 0.875rem;
+    color: #475569;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
